@@ -1,0 +1,119 @@
+include(FeatureSummary)
+set_package_properties(SDL2_mixer_ext PROPERTIES
+  URL "https://wohlsoft.github.io/SDL-Mixer-X"
+  DESCRIPTION "SDL Mixer X, a fork of SDL_mixer, a mixer library for Simple DirectMedia Layer"
+)
+
+@PACKAGE_INIT@
+
+set(SDL_MIXER_X_USE_SYSTEM_AUDIO_LIBRARIES  @USE_SYSTEM_AUDIO_LIBRARIES@)
+set(SDL_MIXER_X_USE_OGG_VORBIS              @USE_OGG_VORBIS@)
+set(SDL_MIXER_X_USE_OGG_VORBIS_STB          @USE_OGG_VORBIS_STB@)
+set(SDL_MIXER_X_USE_OGG_VORBIS_TREMOR       @USE_OGG_VORBIS_TREMOR@)
+set(SDL_MIXER_X_USE_OPUS                    @USE_OPUS@)
+set(SDL_MIXER_X_USE_USE_FLAC                @USE_FLAC@)
+set(SDL_MIXER_X_USE_USE_WAVPACK             @USE_WAVPACK@)
+set(SDL_MIXER_X_USE_MP3_MPG123              @USE_MP3_MPG123@)
+set(SDL_MIXER_X_USE_MODPLUG                 @USE_MODPLUG@)
+set(SDL_MIXER_X_USE_XMP                     @USE_USE_XMP@)
+set(SDL_MIXER_X_USE_XMP_LITE                @USE_USE_XMP_LITE@)
+set(SDL_MIXER_X_USE_GME                     @USE_GME@)
+set(SDL_MIXER_X_USE_FFMPEG                  @USE_FFMPEG@)
+set(SDL_MIXER_X_USE_MIDI                    @USE_MIDI@)
+set(SDL_MIXER_X_USE_MIDI_ADLMIDI            @USE_MIDI_ADLMIDI@)
+set(SDL_MIXER_X_USE_MIDI_OPNMIDI            @USE_MIDI_OPNMIDI@)
+set(SDL_MIXER_X_USE_MIDI_EDMIDI             @USE_MIDI_EDMIDI@)
+set(SDL_MIXER_X_USE_MIDI_FLUIDLITE          @USE_MIDI_FLUIDLITE@)
+set(SDL_MIXER_X_USE_MIDI_FLUIDLITE_OGG_STB  @USE_MIDI_FLUIDLITE_OGG_STB@)
+set(SDL_MIXER_X_USE_MIDI_FLUIDSYNTH         @USE_MIDI_FLUIDSYNTH@)
+
+if(SDL_MIXER_X_USE_SYSTEM_AUDIO_LIBRARIES)
+    set(_sdl_mixer_x_cmake_module_path "${CMAKE_MODULE_PATH}")
+    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+endif()
+
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/SDL2_mixer_ext-shared-targets.cmake")
+    include("${CMAKE_CURRENT_LIST_DIR}/SDL2_mixer_ext-shared-targets.cmake")
+endif()
+
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/SDL2_mixer_ext-static-targets.cmake")
+    include(CMakeFindDependencyMacro)
+    
+    if(SDL_MIXER_X_USE_SYSTEM_AUDIO_LIBRARIES)
+        if(SDL_MIXER_X_USE_OGG_VORBIS AND NOT SDL_MIXER_X_USE_OGG_VORBIS_STB)
+            if(SDL_MIXER_X_USE_OGG_VORBIS_TREMOR AND NOT Tremor_FOUND)
+                find_dependency(Tremor)
+            elseif(NOT Vorbis_FOUND)
+                find_dependency(Vorbis)
+            endif()
+        endif()
+
+        if(SDL_MIXER_X_USE_OPUS AND NOT OpusFile_FOUND)
+            find_dependency(OpusFile)
+        endif()
+
+        if(SDL_MIXER_X_USE_USE_FLAC AND NOT FLAC_FOUND)
+            find_dependency(FLAC)
+        endif()
+
+        if(SDL_MIXER_X_USE_USE_WAVPACK AND NOT WavPack_FOUND)
+            find_dependency(WavPack)
+        endif()
+
+        if(SDL_MIXER_X_USE_MP3_MPG123 AND NOT MPG123_FOUND)
+            find_dependency(MPG123)
+        endif()
+
+        if(SDL_MIXER_X_USE_MODPLUG AND NOT ModPlug_FOUND)
+            find_dependency(ModPlug)
+        endif()
+
+        if(SDL_MIXER_X_USE_XMP)
+            if(SDL_MIXER_X_USE_XMP_LITE AND NOT XMPLITE_FOUND)
+                find_dependency(XMPLite)
+            else()
+                find_dependency(XMP)
+            endif()
+        endif()
+
+        if(SDL_MIXER_X_USE_GME AND NOT GME_FOUND)
+            find_dependency(GME)
+        endif()
+
+        if(SDL_MIXER_X_USE_FFMPEG AND NOT FFMPEG_FOUND)
+            find_dependency(FFMPEG)
+        endif()
+
+        if(SDL_MIXER_X_USE_MIDI)
+            if(SDL_MIXER_X_USE_MIDI_ADLMIDI AND NOT ADLMIDI_FOUND)
+                find_dependency(ADLMIDI)
+            endif()
+
+            if(SDL_MIXER_X_USE_MIDI_OPNMIDI AND NOT OPNMIDI_FOUND)
+                find_dependency(OPNMIDI)
+            endif()
+
+            if(SDL_MIXER_X_USE_MIDI_EDMIDI AND NOT EDMIDI_FOUND)
+                find_dependency(EDMIDI)
+            endif()
+
+            if(SDL_MIXER_X_USE_MIDI_FLUIDLITE AND NOT FluidLite_FOUND)
+                find_dependency(FluidLite)
+                if(NOT USE_MIDI_FLUIDLITE_OGG_STB AND NOT Vorbis_FOUND)
+                    find_dependency(Vorbis)
+                endif()
+            endif()
+
+            if(SDL_MIXER_X_USE_MIDI_FLUIDSYNTH AND NOT FluidSynth_FOUND)
+                find_dependency(FluidSynth)
+            endif()
+        endif()
+    endif()
+
+    include("${CMAKE_CURRENT_LIST_DIR}/SDL2_mixer_ext-static-targets.cmake")
+endif()
+
+if(SDL_MIXER_X_USE_SYSTEM_AUDIO_LIBRARIES)
+    set(CMAKE_MODULE_PATH "${_sdl_mixer_x_cmake_module_path}")
+    unset(_sdl_mixer_x_cmake_module_path)
+endif()
