@@ -3,7 +3,7 @@ if(USE_FFMPEG AND MIXERX_LGPL)
     option(USE_FFMPEG_DYNAMIC "Use dynamical loading of FFMPEG" ON)
 
     if(USE_SYSTEM_AUDIO_LIBRARIES)
-        find_package(FFMPEG QUIET)
+        find_package(FFMPEG REQUIRED)
         message("FFMPEG: [${FFMPEG_avcodec_FOUND}] ${FFMPEG_INCLUDE_DIRS} ${FFMPEG_swresample_LIBRARY} ${FFMPEG_avformat_LIBRARY} ${FFMPEG_avcodec_LIBRARY} ${FFMPEG_avutil_LIBRARY}")
         if(USE_FFMPEG_DYNAMIC)
             list(APPEND SDL_MIXER_DEFINITIONS
@@ -16,10 +16,10 @@ if(USE_FFMPEG AND MIXERX_LGPL)
             message("Dynamic FFMPEG: ${FFMPEG_avutil_DYNAMIC_LIBRARY} ${FFMPEG_avcodec_DYNAMIC_LIBRARY} ${FFMPEG_avformat_DYNAMIC_LIBRARY} ${FFMPEG_swresample_DYNAMIC_LIBRARY}")
         endif()
         set(FFMPEG_LINK_LIBRARIES
-            ${FFMPEG_swresample_LIBRARY}
-            ${FFMPEG_avformat_LIBRARY}
-            ${FFMPEG_avcodec_LIBRARY}
-            ${FFMPEG_avutil_LIBRARY}
+            ${FFMPEG_libswresample_LIBRARY}
+            ${FFMPEG_libavformat_LIBRARY}
+            ${FFMPEG_libavcodec_LIBRARY}
+            ${FFMPEG_libavutil_LIBRARY}
         )
     else()
         message(WARNING "FFMPEG libraries are not a part of AudioCodecs yet. Using any available from the system.")
@@ -41,7 +41,7 @@ if(USE_FFMPEG AND MIXERX_LGPL)
         set(FFMPEG_swresample_FOUND 1)
     endif()
 
-    if(FFMPEG_avcodec_FOUND AND FFMPEG_avformat_FOUND AND FFMPEG_avutil_FOUND AND FFMPEG_swresample_FOUND)
+    if(1)
         set(FFMPEG_FOUND 1)
     endif()
 

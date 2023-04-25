@@ -3,7 +3,7 @@ if(USE_GME AND MIXERX_LGPL)
     option(USE_GME_DYNAMIC "Use dynamical loading of Game Music Emulators library" OFF)
 
     if(USE_SYSTEM_AUDIO_LIBRARIES)
-        find_package(GME QUIET)
+        find_package(GME REQUIRED)
         message("GME: [${GME_FOUND}] ${GME_INCLUDE_DIRS} ${GME_LIBRARIES}")
         if(USE_GME_DYNAMIC)
             list(APPEND SDL_MIXER_DEFINITIONS -DGME_DYNAMIC=\"${GME_DYNAMIC_LIBRARY}\")
