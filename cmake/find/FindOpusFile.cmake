@@ -8,6 +8,7 @@ find_path(OpusFile_INCLUDE_DIR "opusfile.h" PATH_SUFFIXES opus)
 find_path(Ogg_INCLUDE_DIR "ogg.h" PATH_SUFFIXES ogg)
 
 find_library(Opus_LIBRARY NAMES opus)
+find_library(Ogg_LIBRARY NAMES ogg)
 find_library(OpusFile_LIBRARY NAMES opusfile)
 
 if(Opus_INCLUDE_DIR AND Opus_LIBRARY)
@@ -26,8 +27,8 @@ include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(OpusFile DEFAULT_MSG
                                   OpusFile_LIBRARY OpusFile_INCLUDE_DIR)
 
-mark_as_advanced(Opus_INCLUDE_DIR Ogg_INCLUDE_DIR Opus_LIBRARY)
+mark_as_advanced(Opus_INCLUDE_DIR Ogg_INCLUDE_DIR Opus_LIBRARY Ogg_LIBRARY)
 
-set(OpusFile_LIBRARIES ${OpusFile_LIBRARY} ${Opus_LIBRARY})
+set(OpusFile_LIBRARIES ${OpusFile_LIBRARY} ${Opus_LIBRARY} ${Ogg_LIBRARY})
 set(OpusFile_INCLUDE_DIRS ${Ogg_INCLUDE_DIR} ${Opus_INCLUDE_DIR})
 

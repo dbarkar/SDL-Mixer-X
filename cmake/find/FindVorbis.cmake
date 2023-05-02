@@ -8,6 +8,7 @@ find_path(Vorbis_INCLUDE_DIR "codec.h" PATH_SUFFIXES vorbis)
 find_path(Ogg_INCLUDE_DIR "ogg.h" PATH_SUFFIXES ogg)
 
 find_library(Vorbis_LIBRARY NAMES vorbis)
+find_library(Ogg_LIBRARY NAMES ogg)
 find_library(VorbisFile_LIBRARY NAMES vorbisfile)
 
 if(Vorbis_INCLUDE_DIR AND Vorbis_LIBRARY)
@@ -26,7 +27,7 @@ include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Vorbis DEFAULT_MSG
                                   Vorbis_LIBRARY Vorbis_INCLUDE_DIR)
 
-mark_as_advanced(Vorbis_INCLUDE_DIR Ogg_INCLUDE_DIR Vorbis_LIBRARY)
+mark_as_advanced(Vorbis_INCLUDE_DIR Ogg_INCLUDE_DIR Vorbis_LIBRARY Ogg_LIBRARY)
 
-set(Vorbis_LIBRARIES ${VorbisFile_LIBRARY} ${Vorbis_LIBRARY})
+set(Vorbis_LIBRARIES ${VorbisFile_LIBRARY} ${Vorbis_LIBRARY} ${Vorbis_LIBRARY})
 set(Vorbis_INCLUDE_DIRS ${Ogg_INCLUDE_DIR} ${Vorbis_INCLUDE_DIR})
