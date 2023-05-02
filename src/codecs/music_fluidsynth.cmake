@@ -1,5 +1,5 @@
 option(USE_MIDI_FLUIDSYNTH "Build with FluidSynth wave table MIDI sequencer support (LGPL)" OFF)
-if(USE_MIDI_FLUIDSYNTH AND NOT USE_MIDI_FLUIDLITE AND MIXERX_LGPL)
+if(USE_MIDI_FLUIDSYNTH AND MIXERX_LGPL)
     option(USE_MIDI_FLUIDSYNTH_DYNAMIC "Use dynamical loading of FluidSynth" OFF)
 
     if(NOT USE_SYSTEM_AUDIO_LIBRARIES)
@@ -31,8 +31,4 @@ if(USE_MIDI_FLUIDSYNTH AND NOT USE_MIDI_FLUIDLITE AND MIXERX_LGPL)
     else()
         message("-- skipping FluidSynth --")
     endif()
-endif()
-
-if(USE_MIDI_FLUIDSYNTH AND USE_MIDI_FLUIDLITE)
-    message("-- skipping FluidSynth because FluidLite is used instead --")
 endif()
