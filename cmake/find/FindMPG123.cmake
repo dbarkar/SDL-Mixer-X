@@ -1,9 +1,9 @@
-# - Try to find Mpg123
+# - Try to find MPG123
 # Once done this will define
-#  MPG123_FOUND - System has Mpg123
-#  MPG123_INCLUDE_DIRS - The Mpg123 include directories
-#  MPG123_LIBRARIES - The libraries needed to use Mpg123
-#  MPG123_DEFINITIONS - Compiler switches required for using Mpg123
+#  MPG123_FOUND - System has MPG123
+#  MPG123_INCLUDE_DIRS - The MPG123 include directories
+#  MPG123_LIBRARIES - The libraries needed to use MPG123
+#  MPG123_DEFINITIONS - Compiler switches required for using MPG123
 
 find_package(PkgConfig)
 pkg_check_modules(PC_MPG123 QUIET libmpg123)
@@ -29,7 +29,7 @@ endif()
 include(FindPackageHandleStandardArgs)
 # handle the QUIETLY and REQUIRED arguments and set MPG123_FOUND to TRUE
 # if all listed variables are TRUE
-find_package_handle_standard_args(Mpg123  DEFAULT_MSG
+find_package_handle_standard_args(MPG123  DEFAULT_MSG
                                   MPG123_LIBRARY MPG123_INCLUDE_DIR)
 
 mark_as_advanced(MPG123_INCLUDE_DIR MPG123_LIBRARY )
