@@ -4,7 +4,7 @@ if(USE_MP3_MPG123 AND MIXERX_LGPL)
     option(USE_MP3_MPG123_DYNAMIC "Use dynamical loading of MPG123" OFF)
 
     if(USE_SYSTEM_AUDIO_LIBRARIES)
-        find_package(Mpg123 QUIET)
+        find_package(MPG123 QUIET)
         message("MPG123 found in ${MPG123_INCLUDE_DIR} folder")
         if(USE_MP3_MPG123_DYNAMIC)
             list(APPEND SDL_MIXER_DEFINITIONS -DMPG123_DYNAMIC=\"${MPG123_DYNAMIC_LIBRARY}\")
