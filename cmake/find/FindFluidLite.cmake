@@ -5,7 +5,7 @@
 #  FluidLite_LIBRARIES - The libraries needed to use FluidLite
 
 find_path(FluidLite_INCLUDE_DIR "fluidlite.h")
-find_library(FluidLite_LIBRARY NAMES fluidlite)
+find_library(FluidLite_LIBRARY NAMES fluidlite fluidlite-static)
 
 if(FluidLite_INCLUDE_DIR AND FluidLite_LIBRARY)
     if(APPLE)
