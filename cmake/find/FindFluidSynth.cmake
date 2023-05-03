@@ -5,15 +5,15 @@
 #  FluidSynth_LIBRARIES - The libraries needed to use FluidSynth
 
 find_path(FluidSynth_INCLUDE_DIR "fluidsynth.h")
-find_library(FluidSynth_LIBRARY NAMES fluidsynth)
+find_library(FluidSynth_LIBRARY NAMES fluidsynth libfluidsynth)
 
 if(FluidSynth_INCLUDE_DIR AND FluidSynth_LIBRARY)
     if(APPLE)
-        find_library(FluidSynth_DYNAMIC_LIBRARY NAMES "fluidsynth"  PATH_SUFFIXES ".dylib")
+        find_library(FluidSynth_DYNAMIC_LIBRARY NAMES "fluidsynth" "libfluidsynth" PATH_SUFFIXES ".dylib")
     elseif(WIN32)
-        find_library(FluidSynth_DYNAMIC_LIBRARY NAMES "fluidsynth" PATH_SUFFIXES ".dll")
+        find_library(FluidSynth_DYNAMIC_LIBRARY NAMES "fluidsynth" "libfluidsynth" PATH_SUFFIXES ".dll")
     else()
-        find_library(FluidSynth_DYNAMIC_LIBRARY NAMES "fluidsynth" PATH_SUFFIXES ".so")
+        find_library(FluidSynth_DYNAMIC_LIBRARY NAMES "fluidsynth" "libfluidsynth" PATH_SUFFIXES ".so")
     endif()
 endif()
 
